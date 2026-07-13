@@ -1,3 +1,5 @@
+import 'package:navan_business_travel/services/mock_api_interceptor.dart';
+
 import '../models/expense.dart';
 import '../config/constants.dart';
 import 'api_service.dart';
@@ -15,7 +17,8 @@ class ExpenseService {
   // Get all expenses for current user
   Future<List<Expense>> getExpenses() async {
     try {
-      final response = await _apiService.get(AppConstants.getExpensesEndpoint);
+      // final response = await _apiService.get(AppConstants.getExpensesEndpoint);
+      final response = await MockApiInterceptor.getExpenses();
       final List<dynamic> expenses = response['expenses'] ?? [];
       return expenses.map((expense) => Expense.fromJson(expense as Map<String, dynamic>)).toList();
     } catch (e) {
@@ -26,7 +29,8 @@ class ExpenseService {
   // Get expense details
   Future<Expense> getExpenseById(String expenseId) async {
     try {
-      final response = await _apiService.get('${AppConstants.getExpensesEndpoint}/$expenseId');
+      // final response = await _apiService.get('${AppConstants.getExpensesEndpoint}/$expenseId');
+      final response = await MockApiInterceptor.getExpenseById(expenseId);
       return Expense.fromJson(response['expense']);
     } catch (e) {
       throw 'Failed to fetch expense: $e';
@@ -44,18 +48,28 @@ class ExpenseService {
     String? notes,
   }) async {
     try {
-      final response = await _apiService.post(
-        AppConstants.createExpenseEndpoint,
-        {
-          'tripId': tripId,
+      // final response = await _apiService.post(
+      //   AppConstants.createExpenseEndpoint,
+      //   {
+      //     'tripId': tripId,
+      //     'category': category,
+      //     'description': description,
+      //     'amount': amount,
+      //     'currency': currency,
+      //     'receiptUrl': receiptUrl,
+      //     'notes': notes,
+      //     'date': DateTime.now().toIso8601String(),
+      //   },
+      // );
+      final response = await MockApiInterceptor.createExpense(
+              { 'tripId': tripId,
           'category': category,
           'description': description,
           'amount': amount,
           'currency': currency,
           'receiptUrl': receiptUrl,
           'notes': notes,
-          'date': DateTime.now().toIso8601String(),
-        },
+          'date': DateTime.now().toIso8601String()}
       );
       return Expense.fromJson(response['expense']);
     } catch (e) {

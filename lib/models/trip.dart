@@ -10,6 +10,8 @@ class Trip {
   final double spent;
   final String? hotelName;
   final String? flightNumber;
+  final String? flightBookingId;
+  final String? hotelBookingId;
   final List<String> travelers;
   final DateTime createdAt;
   final DateTime? updatedAt;
@@ -26,6 +28,8 @@ class Trip {
     required this.spent,
     this.hotelName,
     this.flightNumber,
+    this.flightBookingId,
+    this.hotelBookingId,
     required this.travelers,
     required this.createdAt,
     this.updatedAt,
@@ -44,6 +48,8 @@ class Trip {
       spent: (json['spent'] as num).toDouble(),
       hotelName: json['hotelName'] as String?,
       flightNumber: json['flightNumber'] as String?,
+      flightBookingId: json['flightBookingId'] as String?,
+      hotelBookingId: json['hotelBookingId'] as String?,
       travelers: List<String>.from(json['travelers'] as List),
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
@@ -63,6 +69,8 @@ class Trip {
       'spent': spent,
       'hotelName': hotelName,
       'flightNumber': flightNumber,
+      'flightBookingId': flightBookingId,
+      'hotelBookingId': hotelBookingId,
       'travelers': travelers,
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),

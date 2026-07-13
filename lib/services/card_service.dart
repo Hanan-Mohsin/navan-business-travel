@@ -1,3 +1,5 @@
+import 'package:navan_business_travel/services/mock_api_interceptor.dart';
+
 import '../models/card.dart';
 import '../config/constants.dart';
 import 'api_service.dart';
@@ -15,7 +17,8 @@ class CardService {
   // Get all corporate cards for current user
   Future<List<CorporateCard>> getCards() async {
     try {
-      final response = await _apiService.get(AppConstants.getCardsEndpoint);
+      // final response = await _apiService.get(AppConstants.getCardsEndpoint);
+      final response = await MockApiInterceptor.getCards();
       final List<dynamic> cards = response['cards'] ?? [];
       return cards.map((card) => CorporateCard.fromJson(card as Map<String, dynamic>)).toList();
     } catch (e) {
@@ -26,7 +29,8 @@ class CardService {
   // Get card details
   Future<CorporateCard> getCardById(String cardId) async {
     try {
-      final response = await _apiService.get('${AppConstants.getCardsEndpoint}/$cardId');
+      // final response = await _apiService.get('${AppConstants.getCardsEndpoint}/$cardId');
+      final response = await MockApiInterceptor.getCardById(cardId);
       return CorporateCard.fromJson(response['card']);
     } catch (e) {
       throw 'Failed to fetch card: $e';

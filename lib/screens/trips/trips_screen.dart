@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:navan_business_travel/screens/trips/trip_booking_management_screen.dart';
 import '../../controllers/trip_controller.dart';
 import '../../config/theme.dart';
 
@@ -25,7 +26,7 @@ class _TripsScreenState extends State<TripsScreen> {
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.add),
                 label: const Text('New Trip'),
-                onPressed: () => _showCreateTripDialog(),
+                onPressed: () => Get.to(() => TripBookingManagementScreen()),
               ),
             ),
           ),
@@ -129,7 +130,7 @@ class _TripsScreenState extends State<TripsScreen> {
         return AppTheme.secondaryColor;
       case 'In Progress':
         return AppTheme.warningColor;
- n      case 'Completed':
+       case 'Completed':
         return AppTheme.successColor;
       case 'Cancelled':
         return AppTheme.errorColor;

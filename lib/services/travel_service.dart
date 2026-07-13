@@ -1,3 +1,5 @@
+import 'package:navan_business_travel/services/mock_api_interceptor.dart';
+
 import '../models/trip.dart';
 import '../models/expense.dart';
 import '../config/constants.dart';
@@ -16,7 +18,8 @@ class TravelService {
   // Get all trips for current user
   Future<List<Trip>> getTrips() async {
     try {
-      final response = await _apiService.get(AppConstants.getTripsEndpoint);
+      // final response = await _apiService.get(AppConstants.getTripsEndpoint);
+      final response = await MockApiInterceptor.getTrips();
       final List<dynamic> trips = response['trips'] ?? [];
       return trips.map((trip) => Trip.fromJson(trip as Map<String, dynamic>)).toList();
     } catch (e) {
@@ -27,7 +30,8 @@ class TravelService {
   // Get trip details
   Future<Trip> getTripById(String tripId) async {
     try {
-      final response = await _apiService.get('${AppConstants.getTripsEndpoint}/$tripId');
+      // final response = await _apiService.get('${AppConstants.getTripsEndpoint}/$tripId');
+      final response = await MockApiInterceptor.getTripById(tripId);
       return Trip.fromJson(response['trip']);
     } catch (e) {
       throw 'Failed to fetch trip: $e';

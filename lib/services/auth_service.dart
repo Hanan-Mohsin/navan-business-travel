@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:navan_business_travel/services/mock_api_interceptor.dart';
 import 'package:uuid/uuid.dart';
 import '../models/user.dart';
 import '../config/constants.dart';
@@ -17,10 +18,12 @@ class AuthService {
   Future<User> login(String email, String password) async {
     try {
       // API placeholder - replace with actual endpoint
-      final response = await _apiService.post(
-        AppConstants.loginEndpoint,
-        {'email': email, 'password': password},
-      );
+      // final response = await _apiService.post(
+      //   AppConstants.loginEndpoint,
+      //   {'email': email, 'password': password},
+      // );
+
+      final response = await MockApiInterceptor.login('demo@company.com', 'password123');
 
       if (response['token'] != null) {
         _apiService.setAuthToken(response['token']);
@@ -43,7 +46,8 @@ class AuthService {
 
   Future<User> getCurrentUser() async {
     try {
-      final response = await _apiService.get(AppConstants.getUserEndpoint);
+      // final response = await _apiService.get(AppConstants.getUserEndpoint);
+      final response = await MockApiInterceptor.getUser();
       return User.fromJson(response['user']);
     } catch (e) {
       throw 'Failed to fetch user: $e';

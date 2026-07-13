@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/expense_controller.dart';
 import '../../config/theme.dart';
+import 'add_expense_screen.dart';
 
 class ExpensesScreen extends StatefulWidget {
   const ExpensesScreen({Key? key}) : super(key: key);
@@ -170,13 +171,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   }
 
   void _showAddExpenseDialog() {
-    Get.defaultDialog(
-      title: 'Add Expense',
-      content: const Text('Expense form coming soon!'),
-      confirm: ElevatedButton(
-        onPressed: () => Get.back(),
-        child: const Text('Close'),
-      ),
-    );
+    Get.to(() => const AddExpenseScreen());
   }
 }
